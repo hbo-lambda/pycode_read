@@ -136,4 +136,4 @@ request、client_address本质上是socket.accept()的返回值，server这里�
 调用过程如下
 ![img](https://read-code.oss-cn-beijing.aliyuncs.com/Snip20210207_10.png)
 
-finish\_content()，会将self.result内容输出wfile中，即
+finish\_content()，会将self.result内容输出wfile中，即StreamRequestHandler的wfile
