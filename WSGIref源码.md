@@ -31,22 +31,22 @@ if __name__ == "__name__":
 基本的调用就这样子，make\_server构造服务，默认使用WSGIServer，请求处理默认使用WSGIRequestHandler，这两个类还会涉及其他的调用，细节会慢慢展开来写  
 
 ### 基本的分层结构
-![](https://read-code.oss-cn-beijing.aliyuncs.com/Snip20210207_9.png)  
+![img](https://read-code.oss-cn-beijing.aliyuncs.com/Snip20210207_9.png)  
 wsgi层由wsgiref模块实现  
 http层由http模块实现  
 tcp/udp层由socketserver模块实现
 
 ###整体调用的结构(忽略了一些细节)，如下
-![](https://read-code.oss-cn-beijing.aliyuncs.com/wsgiref.png)
+![img](https://read-code.oss-cn-beijing.aliyuncs.com/wsgiref.png)
 从图中可以看出WSGIServer和WSGIRequestHandler的继承关系，本质是继承于python的socketserver库的BaseServer和BaseRequestHandler
 
 
 WSGIServer的细节，如下
 
-![](https://read-code.oss-cn-beijing.aliyuncs.com/Snip20210205_2.png)
+![img](https://read-code.oss-cn-beijing.aliyuncs.com/Snip20210205_2.png)
 
 WSGIRequestHandler的细节，如下
-![](https://read-code.oss-cn-beijing.aliyuncs.com/20210205150015.png)
+![img](https://read-code.oss-cn-beijing.aliyuncs.com/20210205150015.png)
 
 ###make\_server函数实现
 
@@ -77,7 +77,7 @@ class WSGIServer(HTTPServer):
 
 ###handle\_request方法
 handle_request方法是由BaseServer实现的，其中主要的调用流程如下： 
-![](https://read-code.oss-cn-beijing.aliyuncs.com/Snip20210207_7.png)  
+![img](https://read-code.oss-cn-beijing.aliyuncs.com/Snip20210207_7.png)  
 1. handler\_request中，使用了selector模块来监听文件描述符。这里不原样复制源码了，摘抄了其中的一部分:  
 
 ```
@@ -134,6 +134,6 @@ request、client_address本质上是socket.accept()的返回值，server这里�
 **handle()由WSGIRequestHandler实现，这个方法中引入了ServerHandler类**    
 
 调用过程如下
-![](https://read-code.oss-cn-beijing.aliyuncs.com/Snip20210207_10.png)
+![img](https://read-code.oss-cn-beijing.aliyuncs.com/Snip20210207_10.png)
 
-finish\_content()，会将self.result内容输出wfile中，即StreamRequestHandler实例的wfile。
+finish\_content()，会将self.result内容输出wfile中，即
