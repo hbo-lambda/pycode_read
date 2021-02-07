@@ -1,4 +1,7 @@
-# WSGIref源码
+## WSGIref源码  
+
+看bottle源码的时候，发现有用到wsgiref模块，就顺带看了wsgiref的实现，内容并不完整。记录下  
+
 ### simple_server.py中的示例代码如下:
 ```
 def demo_app(environ,start_response):
