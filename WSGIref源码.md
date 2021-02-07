@@ -78,7 +78,8 @@ class WSGIServer(HTTPServer):
 ```
 基本上各层干各层的工作，tcp层负责绑定地址和端口号，设置socket相关的选项；http层在tcp层的基础上再设置了server\_name和server\_port; wsgi层实现了wsgi协议相关的参数设定
 
-### handle\_request方法
+### handle\_request方法  
+
 handle_request方法是由BaseServer实现的，其中主要的调用流程如下： 
 ![img](https://read-code.oss-cn-beijing.aliyuncs.com/Snip20210207_7.png)  
 1. handler\_request中，使用了selector模块来监听文件描述符。这里不原样复制源码了，摘抄了其中的一部分:  
