@@ -36,7 +36,7 @@ wsgi层由wsgiref模块实现
 http层由http模块实现  
 tcp/udp层由socketserver模块实现
 
-###整体调用的结构(忽略了一些细节)，如下
+### 整体调用的结构(忽略了一些细节)，如下
 ![img](https://read-code.oss-cn-beijing.aliyuncs.com/wsgiref.png)
 从图中可以看出WSGIServer和WSGIRequestHandler的继承关系，本质是继承于python的socketserver库的BaseServer和BaseRequestHandler
 
@@ -48,13 +48,13 @@ WSGIServer的细节，如下
 WSGIRequestHandler的细节，如下
 ![img](https://read-code.oss-cn-beijing.aliyuncs.com/20210205150015.png)
 
-###make\_server函数实现
+### make\_server函数实现
 
 1. 初始化WSGIServer，赋值给server变量。依据继承关系，可以看出WSGIServer的初始化其实是调用的BaseServer的\_\_init\_\_方法。而且BaseServer实现了\_\_enter\_\_和\_\_exit\_\_方法，所以这个server对象可以使用with语句进行调用
 2. server调用了set\_app方法，这个方法是将demo\_app设置成server对象的属性(self.application).
 3. 返回server.  
 
-###WSGIServer初始化时的server_bind方法
+### WSGIServer初始化时的server_bind方法
 依据继承关系可以看出WSGIServer->HTTPServer->TCPServer都实现了server\_bind方法，查看源码的时候发现，基本上是下边这个样子   
 
 ```
@@ -75,7 +75,7 @@ class WSGIServer(HTTPServer):
 ```
 基本上各层干各层的工作，tcp层负责绑定地址和端口号，设置socket相关的选项；http层在tcp层的基础上再设置了server\_name和server\_port; wsgi层实现了wsgi协议相关的参数设定
 
-###handle\_request方法
+### handle\_request方法
 handle_request方法是由BaseServer实现的，其中主要的调用流程如下： 
 ![img](https://read-code.oss-cn-beijing.aliyuncs.com/Snip20210207_7.png)  
 1. handler\_request中，使用了selector模块来监听文件描述符。这里不原样复制源码了，摘抄了其中的一部分:  
