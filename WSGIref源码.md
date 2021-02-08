@@ -39,7 +39,8 @@ wsgi层由wsgiref模块实现
 http层由http模块实现  
 tcp/udp层由socketserver模块实现
 
-### 整体调用的结构(忽略了一些细节)，如下
+### 整体调用的结构(忽略了一些细节)，如下:
+
 ![img](https://read-code.oss-cn-beijing.aliyuncs.com/wsgiref.png)
 从图中可以看出WSGIServer和WSGIRequestHandler的继承关系，本质是继承于python的socketserver库的BaseServer和BaseRequestHandler
 
